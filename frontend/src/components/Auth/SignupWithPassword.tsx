@@ -14,11 +14,12 @@ export default function SignupWithPassword() {
     name: "",
     email: "",
     password: "",
+    role: "RECRUITER",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setData({
       ...data,
       [e.target.name]: e.target.value,
@@ -37,6 +38,7 @@ export default function SignupWithPassword() {
         name: data.name,
         email: data.email,
         password: data.password,
+        role: data.role,
         callbackURL,
       });
       router.push(callbackURL);
@@ -77,13 +79,30 @@ export default function SignupWithPassword() {
       <InputGroup
         type="password"
         label="Password"
-        className="mb-5 [&_input]:py-3.75"
+        className="mb-4 [&_input]:py-3.75"
         placeholder="Create a password"
         name="password"
         handleChange={handleChange}
         value={data.password}
         icon={<PasswordIcon />}
       />
+
+      <div className="mb-5">
+        <label className="mb-2.5 block font-medium text-dark dark:text-white">
+          Account Role
+        </label>
+        <div className="relative">
+          <select
+            name="role"
+            value={data.role}
+            onChange={handleChange}
+            className="w-full rounded-lg border border-stroke bg-transparent py-3.5 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:bg-dark-2 dark:focus:border-primary"
+          >
+            <option value="RECRUITER">Recruiter</option>
+            <option value="ADMIN">Admin</option>
+          </select>
+        </div>
+      </div>
 
       <div className="mb-4.5">
         <button

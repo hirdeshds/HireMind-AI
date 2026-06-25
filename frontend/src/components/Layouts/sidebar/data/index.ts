@@ -2,15 +2,39 @@ import * as Icons from "../icons";
 
 export const NAV_DATA = [
   {
-    label: "MAIN MENU",
+    label: "RECRUITER MENU",
     items: [
       {
         title: "Dashboard",
         icon: Icons.HomeIcon,
+        url: "/",
+        items: [],
+      },
+      {
+        title: "Jobs",
+        icon: Icons.Alphabet,
         items: [
           {
-            title: "eCommerce",
-            url: "/",
+            title: "Manage Jobs",
+            url: "/jobs",
+          },
+          {
+            title: "Create Job",
+            url: "/jobs/create",
+          },
+        ],
+      },
+      {
+        title: "Candidates",
+        icon: Icons.User,
+        items: [
+          {
+            title: "Leaderboard",
+            url: "/candidates",
+          },
+          {
+            title: "Upload Resumes",
+            url: "/candidates/upload",
           },
         ],
       },
@@ -20,75 +44,22 @@ export const NAV_DATA = [
         icon: Icons.Calendar,
         items: [],
       },
-      {
-        title: "Profile",
-        url: "/profile",
-        icon: Icons.User,
-        items: [],
-      },
-      {
-        title: "Forms",
-        icon: Icons.Alphabet,
-        items: [
-          {
-            title: "Form Elements",
-            url: "/forms/form-elements",
-          },
-          {
-            title: "Form Layout",
-            url: "/forms/form-layout",
-          },
-        ],
-      },
-      {
-        title: "Tables",
-        url: "/tables",
-        icon: Icons.Table,
-        items: [
-          {
-            title: "Tables",
-            url: "/tables",
-          },
-        ],
-      },
-      {
-        title: "Pages",
-        icon: Icons.Alphabet,
-        items: [
-          {
-            title: "Settings",
-            url: "/pages/settings",
-          },
-        ],
-      },
     ],
   },
   {
-    label: "OTHERS",
+    label: "SYSTEM",
     items: [
       {
-        title: "Charts",
+        title: "Admin Dashboard",
         icon: Icons.PieChart,
-        items: [
-          {
-            title: "Basic Chart",
-            url: "/charts/basic-chart",
-          },
-        ],
+        url: "/admin",
+        items: [],
       },
       {
-        title: "UI Elements",
-        icon: Icons.FourCircle,
-        items: [
-          {
-            title: "Alerts",
-            url: "/ui-elements/alerts",
-          },
-          {
-            title: "Buttons",
-            url: "/ui-elements/buttons",
-          },
-        ],
+        title: "Settings",
+        icon: Icons.Alphabet,
+        url: "/pages/settings",
+        items: [],
       },
     ],
   },
