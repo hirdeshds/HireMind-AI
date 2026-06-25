@@ -17,11 +17,18 @@ model User {
   updatedAt     DateTime  @updatedAt @map("updated_at")
   phoneNumber   Int?      @map("phone_number")
   bio           String?
+  role          Role      @default(RECRUITER)
   sessions      Session[]
   accounts      Account[]
+  jobs          Job[]     @relation("UserJobs")
 
   @@unique([email])
   @@map("user")
+}
+
+enum Role {
+  ADMIN
+  RECRUITER
 }
 
 model Session {
@@ -69,4 +76,93 @@ model Verification {
 
   @@index([identifier], map: "verification_identifier_idx")
   @@map("verification")
+}
+
+model Job {
+  id               String   @id @default(cuid())
+  title            String
+  description      String
+  skillsRequired   String[]
+  experienceLevel  String
+  location         String
+  salaryRange      String?
+  status           JobStatus @default(OPEN)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  recruiterId      String
+  recruiter        User     @relation("UserJobs", fields: [recruiterId], references: [id])
+  
+  applications     Application[]
+
+  @@map("job")
+}
+
+enum JobStatus {
+  OPEN
+  CLOSED
+  ARCHIVED
+}
+
+model Candidate {
+  id             String   @id @default(cuid())
+  firstName      String
+  lastName       String
+  email          String   @unique
+  phone          String?
+  location       String?
+  
+  // Extracted data
+  skills         String[]
+  experience     Json?    // Array of objects
+  education      Json?    // Array of objects
+  projects       Json?    // Array of objects
+  certifications String[]
+  
+  resumeUrl      String?  // S3 or local path
+  resumeText     String?
+  
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  
+  applications   Application[]
+
+  @@map("candidate")
+}
+
+model Application {
+  id             String   @id @default(cuid())
+  jobId          String
+  job            Job      @relation(fields: [jobId], references: [id])
+  candidateId    String
+  candidate      Candidate @relation(fields: [candidateId], references: [id])
+  
+  status         AppStatus @default(NEW)
+  
+  // AI Scoring
+  overallScore   Float?
+  skillsMatch    Float?
+  experienceMatch Float?
+  educationMatch Float?
+  projectMatch   Float?
+  
+  matchedSkills  String[]
+  missingSkills  String[]
+  
+  aiSummary      String?
+  recommendation String?
+  
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("application")
+}
+
+enum AppStatus {
+  NEW
+  REVIEWED
+  SHORTLISTED
+  INTERVIEWING
+  REJECTED
+  HIRED
 }
