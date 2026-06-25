@@ -1,9 +1,17 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 from typing import List
 
-# Pydantic models help us define the shape and type of data we expect
-class Candidate(BaseModel):
+class CandidateBase(BaseModel):
     name: str
-    email: str
+    email: str # Use standard string to avoid extra dependency (email-validator) for now
     skills: List[str] = []
     experience_years: int = 0
+
+class CandidateCreate(CandidateBase):
+    pass
+
+class CandidateResponse(CandidateBase):
+    id: int
+    
+    class Config:
+        from_attributes = True
