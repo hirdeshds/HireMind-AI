@@ -8,11 +8,21 @@ from app.db import models # Import models to ensure they are registered with Bas
 # Create database tables
 Base.metadata.create_all(bind=engine)
 
+from fastapi.middleware.cors import CORSMiddleware
+
 # Create the main FastAPI application instance
 app = FastAPI(
     title=settings.PROJECT_NAME,
     description="Complete backend structure for HireMind AI.",
     version=settings.VERSION
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Include the API router from our endpoints file

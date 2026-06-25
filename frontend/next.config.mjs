@@ -1,12 +1,14 @@
 /** @type {import("next").NextConfig} */
 const nextConfig = {
   async rewrites() {
-    return [
-      {
-        source: "/api/:path*",
-        destination: "http://127.0.0.1:8000/api/:path*", // Proxy to Backend
-      },
-    ];
+    return {
+      fallback: [
+        {
+          source: "/api/:path*",
+          destination: "http://127.0.0.1:8000/api/:path*", // Proxy to Backend
+        },
+      ],
+    };
   },
   images: {
     qualities: [75, 100],

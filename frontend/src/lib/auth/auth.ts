@@ -7,7 +7,7 @@ if (!process.env.BETTER_AUTH_SECRET) {
 }
 
 export const auth = betterAuth({
-  appName: "NextAdmin",
+  appName: "HireMind AI",
   baseURL: process.env.BETTER_AUTH_URL!,
 
   user: {

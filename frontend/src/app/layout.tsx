@@ -12,11 +12,11 @@ import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | NextAdmin - Next.js Dashboard Kit",
-    default: "NextAdmin - Next.js Dashboard Kit",
+    template: "%s | HireMind AI - Smart ATS",
+    default: "HireMind AI - Smart Applicant Tracking System",
   },
   description:
-    "Next.js admin dashboard toolkit with 200+ templates, UI components, and integrations for fast dashboard development.",
+    "An AI-powered Applicant Tracking System that intelligently parses resumes and matches candidates to jobs.",
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {
