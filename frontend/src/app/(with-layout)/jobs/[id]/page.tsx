@@ -53,8 +53,8 @@ export default function JobDashboardPage() {
           </div>
           <div className="mt-4 flex items-end justify-between">
             <div>
-              <h4 className="text-title-sm font-bold text-dark dark:text-white">5</h4>
-              <span className="text-body-sm font-medium">Top Candidates (>90%)</span>
+              <h4 className="text-title-sm font-bold text-dark dark:text-white">5</h4>       
+              <span className="text-body-sm font-medium">Top Candidates (&gt;90%)</span>        
             </div>
           </div>
         </div>
