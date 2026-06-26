@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import React from "react";
 import { db } from "@/lib/db";

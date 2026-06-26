@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import JobsTable from "@/components/Tables/JobsTable";
 import { getJobs } from "@/lib/actions/job.actions";
