@@ -32,6 +32,17 @@ export const auth = betterAuth({
     enabled: true,
     autoSignIn: false,
     minPasswordLength: 8,
+    sendResetPassword: async ({ user, url, token }, request) => {
+      const { sendEmail } = await import("../email");
+      await sendEmail(
+        user.email,
+        "Reset Your Password - HireMind AI",
+        `<p>Hi ${user.name || "User"},</p>
+         <p>You requested a password reset. Click the link below to reset your password:</p>
+         <p><a href="${url}">${url}</a></p>
+         <p>If you did not request this, please ignore this email.</p>`
+      );
+    },
   },
 
   socialProviders: {

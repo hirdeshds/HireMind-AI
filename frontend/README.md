@@ -1,101 +1,65 @@
-# NextAdmin - Next.js Admin Dashboard Template and Components
+# HireMind AI - Frontend
 
-**NextAdmin** is a Free, open-source Next.js admin dashboard toolkit featuring 200+ UI components and templates that come with pre-built elements, components, pages, high-quality design, integrations, and much more to help you create powerful admin dashboards with ease.
+HireMind AI is an AI-powered Applicant Tracking System (ATS) that intelligently parses resumes, matches candidates to job descriptions, and provides actionable analytics for recruiters.
 
-[![nextjs admin template](https://cdn.pimjo.com/nextadmin-2.png)](https://nextadmin.co/)
+This directory contains the **Frontend** application, built on modern React practices to provide a sleek, fast, and interactive dashboard for recruiters and administrators.
 
----
-## Useful Links
-- [Website](https://nextadmin.co/)
-- [Live Demo](https://demo.nextadmin.co/)
-- [Docs](https://nextadmin.co/docs)
-- [Components](https://nextadmin.co/components)
+## Tech Stack
+- **Framework:** [Next.js 15](https://nextjs.org/) (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS v4 & custom glassmorphism effects
+- **Authentication:** [Better Auth](https://better-auth.com) (JWT based)
+- **Database ORM:** [Prisma](https://www.prisma.io/) (PostgreSQL via Supabase)
+- **State & Data Fetching:** React Server Components + Client Hooks
+- **Charting:** ApexCharts
 
-## Quick start
+## Core Features
+- **Recruiter Dashboard:** Real-time metrics and dynamic data aggregation.
+- **Admin Dashboard:** Role-based access control and user management.
+- **Authentication:** Secure sign-in and sign-up with email and OAuth capabilities.
+- **Dynamic Visuals:** Custom AI-themed components, interactive hovering panels, and fluid animations.
 
-You'll need Node.js installed. Then:
+## Getting Started
 
-```bash
-git clone https://github.com/NextAdminHQ/nextjs-admin-dashboard.git
-cd nextjs-admin-dashboard
+### Prerequisites
+- Node.js (v18 or higher)
+- A Supabase PostgreSQL database (or any PostgreSQL instance)
+
+### 1. Environment Setup
+Create a `.env` file in the root of the `frontend/` directory with the following variables:
+```env
+# Authentication configuration
+BETTER_AUTH_SECRET="your_secure_random_string"
+BETTER_AUTH_URL="http://localhost:3000"
+NEXT_PUBLIC_APP_URL="http://localhost:3000"
+
+# Database connection
+DATABASE_URL="postgresql://user:password@host:5432/postgres"
 ```
 
-Install dependencies — pick your poison:
-
+### 2. Install Dependencies
 ```bash
 npm install
-# or: yarn / pnpm install / bun install
 ```
 
-Copy the example env file and fill in your credentials:
-
+### 3. Sync Database Schema
+Ensure your database tables are created according to the Prisma schema:
 ```bash
-cp .env.example .env.local
+npm run db:generate
+npx prisma db push
 ```
 
-Then start the dev server:
-
+### 4. Run Development Server
 ```bash
 npm run dev
 ```
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Open [http://localhost:3000](http://localhost:3000) and you're good.
+## File Structure Highlights
+- `src/app/`: Next.js App Router pages (Auth routes, Dashboards).
+- `src/components/`: Reusable React components (Charts, Layouts, Interactive UI).
+- `src/lib/`: Core utilities including Prisma DB initialization (`db/index.ts`) and Auth configuration (`auth/auth.ts`).
+- `prisma/`: Database schema and generated client.
 
-## Deploying
-
-Works out of the box on Vercel and Netlify.
-
-## Docs & components
-
-Full docs at [nextadmin.co/docs](https://nextadmin.co/docs). Component-level docs (props, examples, code) live under [/docs/components](https://nextadmin.co/docs) — accordions, charts, tables, form layouts, maps, modals, and everything else.
-
-## Community
-
-- [Discord](https://pimjo.com/community)
-- [X / Twitter](https://twitter.com/PimjoHQ)
-- [GitHub](https://github.com/NextAdminHQ/)
-
-
-## Update Logs
-
-### Version 1.3.0 - [April 30, 2026]
-
-- Update Tailwind CSS to v4 and update dependencies.
-- Added new authentication pages.
-- Updated to latest Next.js
-- Implemented authentication with BetterAuth and Prisma.
-- Configured Role-Based Access Control (RBAC).
-- Added user profile data mutations and queries in profile and settings pages.
-
-### Version 1.2.3 - [Mar 16, 2026]
-
-- Update Next.js to ^16.1.6 and configure image qualities
-
-### Version 1.2.2 - [December 01, 2025]
-
-- Updated to Next.js 16
-- Updated dependencies.
-
-### Version 1.2.1 - [Mar 20, 2025]
-
-- Fix Peer dependency issues and NextConfig warning.
-- Updated apexcharts and react-apexhcarts to the latest version.
-
-### Version 1.2.0 - Major Upgrade and UI Improvements - [Jan 27, 2025]
-
-- Upgraded to Next.js v15 and updated dependencies
-- API integration with loading skeleton for tables and charts.
-- Improved code structure for better readability.
-- Rebuilt components like dropdown, sidebar, and all ui-elements using accessibility practices.
-- Using search-params to store dropdown selection and refetch data.
-- Semantic markups, better separation of concerns and more.
-
-### Version 1.1.0
-
-- Updated Dependencies
-- Removed Unused Integrations
-- Optimized App
-
-### Version 1.0
-
-- Initial Release - [May 13, 2024]
+## Contributing
+When developing, ensure you follow standard linting guidelines. Run `npm run lint` before committing any changes. CI workflows are automatically triggered via GitHub Actions on PRs to the `main` branch.
