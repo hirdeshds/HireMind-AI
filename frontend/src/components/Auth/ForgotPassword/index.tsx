@@ -21,7 +21,7 @@ export default function ForgotPassword() {
     try {
       const result = await requestPasswordReset({
         email: email,
-        callbackURL: "/auth/reset-password",
+        redirectTo: "/auth/reset-password",
       });
 
       if (result.error) {

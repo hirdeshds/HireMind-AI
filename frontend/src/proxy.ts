@@ -1,4 +1,4 @@
-import { auth } from "@/lib/auth";
+// Removed auth import to prevent Edge Runtime issues
 // import type { AppRole } from "@/lib/auth/modules/authorization/permissions";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -12,7 +12,7 @@ const SESSION_COOKIE_NAME =
 //   { prefix: "/dashboard/users", requiredRole: "admin" },
 // ];
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const callbackUrl = `${pathname}${request.nextUrl.search}`;
   const isAuthOnly = AUTH_ONLY_PATHS.some((path) => pathname.startsWith(path));
@@ -30,9 +30,12 @@ export async function middleware(request: NextRequest) {
   }
 
   try {
-    const session = await auth.api.getSession({
-      headers: request.headers,
+    const response = await fetch(`${request.nextUrl.origin}/api/auth/get-session`, {
+      headers: {
+        cookie: request.headers.get("cookie") || "",
+      },
     });
+    const session = response.ok ? await response.json() : null;
 
     if (!session?.session && !isAuthOnly) {
       const url = request.nextUrl.clone();

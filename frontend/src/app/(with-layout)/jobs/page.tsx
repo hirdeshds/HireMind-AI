@@ -1,5 +1,6 @@
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import JobsTable from "@/components/Tables/JobsTable";
+import { getJobs } from "@/lib/actions/job.actions";
 import { Metadata } from "next";
 import Link from "next/link";
 
@@ -7,7 +8,9 @@ export const metadata: Metadata = {
   title: "Jobs Management | HireMind-AI",
 };
 
-const JobsPage = () => {
+const JobsPage = async () => {
+  const jobs = await getJobs();
+
   return (
     <>
       <Breadcrumb pageName="Jobs" />
@@ -25,7 +28,7 @@ const JobsPage = () => {
       </div>
 
       <div className="space-y-10">
-        <JobsTable />
+        <JobsTable jobs={jobs} />
       </div>
     </>
   );
