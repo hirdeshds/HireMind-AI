@@ -31,9 +31,9 @@ jobs:
       run: npm ci || npm install
       
     - name: Generate Prisma Client
-      run: npm run db:generate
+      run: npx prisma generate
       env:
-        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        DATABASE_URL: "postgresql://placeholder:placeholder@localhost:5432/placeholder"
         
     - name: Lint
       run: npm run lint
@@ -41,4 +41,7 @@ jobs:
     - name: Build Next.js
       run: npm run build
       env:
-        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        DATABASE_URL: "postgresql://placeholder:placeholder@localhost:5432/placeholder"
+        BETTER_AUTH_SECRET: "ci-placeholder-secret-key-for-build"
+        BETTER_AUTH_URL: "http://localhost:3000"
+        NEXT_PUBLIC_APP_URL: "http://localhost:3000"
