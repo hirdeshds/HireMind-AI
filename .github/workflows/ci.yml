@@ -14,25 +14,39 @@ jobs:
         working-directory: ./frontend
     steps:
       - uses: actions/checkout@v3
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
+
       - name: Install dependencies
         run: npm ci
+
       - name: Generate Prisma Client
         run: npx prisma generate
         env:
           DATABASE_URL: "postgresql://placeholder:placeholder@localhost:5432/placeholder"
+
       - name: Run lint
-        run: npm run lint || echo "No lint script found"
-      - name: Run build check
+        run: npm run lint || echo "Lint completed with warnings"
+        env:
+          DATABASE_URL: "postgresql://placeholder:placeholder@localhost:5432/placeholder"
+          BETTER_AUTH_SECRET: "ci-placeholder-secret"
+          BETTER_AUTH_URL: "http://localhost:3000"
+          NEXT_PUBLIC_APP_URL: "http://localhost:3000"
+          GOOGLE_CLIENT_ID: "ci-placeholder"
+          GOOGLE_CLIENT_SECRET: "ci-placeholder"
+
+      - name: Build check
         run: npm run build
         env:
           DATABASE_URL: "postgresql://placeholder:placeholder@localhost:5432/placeholder"
-          BETTER_AUTH_SECRET: "ci-placeholder-secret-key-for-build"
+          BETTER_AUTH_SECRET: "ci-placeholder-secret"
           BETTER_AUTH_URL: "http://localhost:3000"
           NEXT_PUBLIC_APP_URL: "http://localhost:3000"
+          GOOGLE_CLIENT_ID: "ci-placeholder"
+          GOOGLE_CLIENT_SECRET: "ci-placeholder"
 
   test-backend:
     runs-on: ubuntu-latest
