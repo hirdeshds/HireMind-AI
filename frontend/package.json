@@ -10,7 +10,8 @@
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "db:studio": "prisma studio",
-    "auth:generate": "npx @better-auth/cli generate --config ./src/lib/auth/auth.ts --output ./prisma/schema.prisma"
+    "auth:generate": "npx @better-auth/cli generate --config ./src/lib/auth/auth.ts --output ./prisma/schema.prisma",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@better-auth/prisma-adapter": "^1.6.7",
